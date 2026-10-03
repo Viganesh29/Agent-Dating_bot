@@ -27,12 +27,6 @@ export default function RankingsView({
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [minScore, setMinScore] = useState<number>(0);
 
-  React.useEffect(() => {
-    if (selectedPersonId) {
-      setCurrentPersonId(selectedPersonId);
-    }
-  }, [selectedPersonId]);
-
   const currentPerson = useMemo(() => {
     return people.find(p => p.id === currentPersonId) || people[0];
   }, [people, currentPersonId]);

@@ -20,32 +20,17 @@ export default function ProfileDetail({
   onDateClick, 
   onViewRankings 
 }: ProfileDetailProps) {
-  React.useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
-
   return (
-    <div 
-      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
-      className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200 cursor-pointer"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="profile-detail-title"
-    >
-      <div className="relative w-full max-w-4xl bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col cursor-default">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200">
+      <div className="relative w-full max-w-4xl bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col">
         
         {/* Modal Header & Hero */}
         <div className="relative bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 p-6 sm:p-8 border-b border-slate-800">
           <button 
             onClick={onClose}
-            aria-label="Close dossier dialog"
-            className="absolute top-5 right-5 p-2 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors border border-slate-700 focus:ring-2 focus:ring-rose-500 focus:outline-none"
+            className="absolute top-5 right-5 p-2 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors border border-slate-700"
           >
-            <X className="w-5 h-5" aria-hidden="true" />
+            <X className="w-5 h-5" />
           </button>
 
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">

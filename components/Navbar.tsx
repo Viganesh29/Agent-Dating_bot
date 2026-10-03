@@ -2,11 +2,11 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Heart, Users, Sparkles, Trophy, PlusCircle, Video } from 'lucide-react';
+import { Heart, Users, Sparkles, Trophy, PlusCircle } from 'lucide-react';
 
 interface NavbarProps {
-  activeTab: 'profiles' | 'arena' | 'rankings' | 'ingest' | 'video';
-  setActiveTab: (tab: 'profiles' | 'arena' | 'rankings' | 'ingest' | 'video') => void;
+  activeTab: 'profiles' | 'arena' | 'rankings' | 'ingest';
+  setActiveTab: (tab: 'profiles' | 'arena' | 'rankings' | 'ingest') => void;
   peopleCount: number;
 }
 
@@ -97,19 +97,6 @@ export default function Navbar({ activeTab, setActiveTab, peopleCount }: NavbarP
             <PlusCircle className="w-4 h-4 text-emerald-400" />
             <span className="hidden md:inline">Add Person</span>
             <span className="md:hidden">Add</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('video')}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all ${
-              activeTab === 'video'
-                ? 'bg-rose-600 text-white shadow-lg shadow-rose-600/30'
-                : 'bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 border border-rose-500/30'
-            }`}
-          >
-            <Video className="w-4 h-4" />
-            <span className="hidden lg:inline">3-Min Video Tour</span>
-            <span className="lg:hidden">Video</span>
           </button>
         </nav>
       </div>
