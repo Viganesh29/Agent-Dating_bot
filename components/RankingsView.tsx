@@ -77,13 +77,14 @@ export default function RankingsView({
 
           {/* Person Selector Dropdown */}
           <div className="w-full md:w-auto flex flex-col sm:flex-row items-center gap-3">
-            <label className="text-xs text-slate-400 font-semibold whitespace-nowrap">
+            <label htmlFor="person-selector" className="text-xs text-slate-400 font-semibold whitespace-nowrap">
               Select Another Person:
             </label>
             <select
+              id="person-selector"
               value={currentPersonId}
               onChange={(e) => setCurrentPersonId(e.target.value)}
-              className="w-full sm:w-64 px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-200 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+              className="w-full sm:w-64 px-4 py-2.5 min-h-[44px] rounded-xl bg-slate-950 border border-slate-700 text-slate-200 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500/50"
             >
               {people.map(p => (
                 <option key={p.id} value={p.id}>
@@ -98,13 +99,15 @@ export default function RankingsView({
         {/* Filter & Search Bar */}
         <div className="mt-6 pt-5 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="relative w-full sm:w-72">
-            <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
+            <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" aria-hidden="true" />
             <input
+              id="candidate-search-input"
               type="text"
+              aria-label="Search suitors by name or role"
               placeholder="Search suitors by name or role..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500"
+              className="w-full pl-10 pr-4 py-2.5 min-h-[44px] rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30"
             />
           </div>
 
@@ -112,16 +115,18 @@ export default function RankingsView({
             <span className="text-xs text-slate-400 font-medium">Filter Fit:</span>
             <button
               onClick={() => setMinScore(0)}
-              className={`px-3 py-1 rounded-lg text-xs font-semibold transition-colors ${
-                minScore === 0 ? 'bg-amber-500 text-slate-950' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+              aria-label="Show all candidate matches"
+              className={`px-4 py-2 min-h-[44px] rounded-xl text-xs font-semibold transition-colors focus:ring-2 focus:ring-amber-500 focus:outline-none ${
+                minScore === 0 ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
               }`}
             >
               All ({rankingsDossier.topRankings.length})
             </button>
             <button
               onClick={() => setMinScore(85)}
-              className={`px-3 py-1 rounded-lg text-xs font-semibold transition-colors ${
-                minScore === 85 ? 'bg-amber-500 text-slate-950' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+              aria-label="Show top matches with 85% or higher fit"
+              className={`px-4 py-2 min-h-[44px] rounded-xl text-xs font-semibold transition-colors focus:ring-2 focus:ring-amber-500 focus:outline-none ${
+                minScore === 85 ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
               }`}
             >
               Top Matches (&ge;85%)

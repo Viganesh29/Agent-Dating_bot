@@ -12,18 +12,31 @@ interface VideoGuideModalProps {
 }
 
 export default function VideoGuideModal({ onClose, onStartTour }: VideoGuideModalProps) {
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/85 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200">
+    <div 
+      className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/85 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="video-modal-title"
+    >
       <div className="relative w-full max-w-3xl bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col">
         
         {/* Header */}
         <div className="p-6 bg-gradient-to-r from-rose-950 via-slate-900 to-indigo-950 border-b border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-rose-600/30 border border-rose-500/40 flex items-center justify-center">
-              <Video className="w-5 h-5 text-rose-400" />
+              <Video className="w-5 h-5 text-rose-400" aria-hidden="true" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white">
+              <h3 id="video-modal-title" className="text-lg font-bold text-white">
                 3-Minute Official Video Tour & Evaluation Guide
               </h3>
               <p className="text-xs text-slate-400">
@@ -34,9 +47,10 @@ export default function VideoGuideModal({ onClose, onStartTour }: VideoGuideModa
 
           <button
             onClick={onClose}
-            className="p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white transition-colors"
+            aria-label="Close video tour guide"
+            className="p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white transition-colors focus:ring-2 focus:ring-rose-500 focus:outline-none"
           >
-            <X className="w-4 h-4" />
+            <X className="w-4 h-4" aria-hidden="true" />
           </button>
         </div>
 

@@ -85,6 +85,14 @@ export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col bg-[#090d16] text-slate-100 selection:bg-rose-500 selection:text-white">
       
+      {/* Skip Link for Keyboard Accessibility */}
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 px-4 py-2 bg-rose-600 text-white font-bold rounded-xl shadow-xl focus:outline-none focus:ring-2 focus:ring-white text-xs"
+      >
+        Skip to main content
+      </a>
+
       {/* Top Navigation */}
       <Navbar 
         activeTab={activeTab} 
@@ -93,7 +101,7 @@ export default function HomePage() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+      <main id="main-content" className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10 focus:outline-none" tabIndex={-1}>
         
         {/* HERO BANNER */}
         <section className="relative overflow-hidden rounded-3xl p-6 sm:p-10 border border-slate-800 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950/70 shadow-2xl">
@@ -120,7 +128,7 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center gap-3">
               <button
                 onClick={() => setActiveTab('arena')}
-                className="px-5 py-3 rounded-2xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white text-xs sm:text-sm font-extrabold shadow-lg shadow-rose-950/40 flex items-center gap-2 transition-all"
+                className="px-5 py-3 rounded-2xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white text-xs sm:text-sm font-extrabold shadow-lg shadow-rose-950/40 flex items-center gap-2 transition-all min-h-[44px]"
               >
                 <Heart className="w-4 h-4 fill-white" />
                 <span>Watch Live Agent Dates</span>
@@ -128,7 +136,7 @@ export default function HomePage() {
 
               <button
                 onClick={() => setActiveTab('rankings')}
-                className="px-5 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs sm:text-sm font-bold border border-slate-700 transition-all flex items-center gap-2"
+                className="px-5 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs sm:text-sm font-bold border border-slate-700 transition-all flex items-center gap-2 min-h-[44px]"
               >
                 <Trophy className="w-4 h-4 text-amber-400" />
                 <span>View Final Rankings</span>
@@ -136,7 +144,7 @@ export default function HomePage() {
 
               <button
                 onClick={() => setActiveTab('ingest')}
-                className="px-4 py-3 rounded-2xl bg-emerald-950/60 hover:bg-emerald-900/60 text-emerald-300 text-xs sm:text-sm font-bold border border-emerald-800/60 transition-all flex items-center gap-2"
+                className="px-4 py-3 rounded-2xl bg-emerald-950/60 hover:bg-emerald-900/60 text-emerald-300 text-xs sm:text-sm font-bold border border-emerald-800/60 transition-all flex items-center gap-2 min-h-[44px]"
               >
                 <PlusCircle className="w-4 h-4 text-emerald-400" />
                 <span>Paste Your Own Public Links</span>
@@ -148,40 +156,58 @@ export default function HomePage() {
         {/* TAB 1: PROFILES GALLERY */}
         {activeTab === 'profiles' && (
           <div className="space-y-6 animate-in fade-in duration-300">
+            {/* Semantic Section Heading */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+              <div>
+                <h2 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
+                  <Users className="w-5 h-5 text-rose-500" />
+                  <span>Verified Agent Profiles Directory</span>
+                </h2>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Inspect dual-source intelligence dossiers or launch autonomous dates.
+                </p>
+              </div>
+              <span className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-900 text-rose-400 border border-slate-800">
+                {filteredPeople.length} Agents Available
+              </span>
+            </div>
+
             {/* Gallery Control Bar */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 glass-panel p-4 rounded-2xl border border-slate-800 bg-slate-900/60">
               <div className="relative w-full sm:w-80">
-                <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
+                <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" aria-hidden="true" />
                 <input
+                  id="agent-search-input"
                   type="text"
+                  aria-label="Search among real people by name, tagline, or archetype"
                   placeholder="Search among 34 real people..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-rose-500"
+                  className="w-full pl-10 pr-4 py-2.5 min-h-[44px] rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-500/30"
                 />
               </div>
 
               <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
                 <button
                   onClick={() => setSelectedGender('all')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
-                    selectedGender === 'all' ? 'bg-rose-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                  className={`px-4 py-2 min-h-[44px] rounded-xl text-xs font-semibold transition-colors focus:ring-2 focus:ring-rose-500 focus:outline-none ${
+                    selectedGender === 'all' ? 'bg-rose-600 text-white shadow-md' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
                   }`}
                 >
                   All ({people.length})
                 </button>
                 <button
                   onClick={() => setSelectedGender('female')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
-                    selectedGender === 'female' ? 'bg-rose-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                  className={`px-4 py-2 min-h-[44px] rounded-xl text-xs font-semibold transition-colors focus:ring-2 focus:ring-rose-500 focus:outline-none ${
+                    selectedGender === 'female' ? 'bg-rose-600 text-white shadow-md' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
                   }`}
                 >
                   Women
                 </button>
                 <button
                   onClick={() => setSelectedGender('male')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
-                    selectedGender === 'male' ? 'bg-rose-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                  className={`px-4 py-2 min-h-[44px] rounded-xl text-xs font-semibold transition-colors focus:ring-2 focus:ring-rose-500 focus:outline-none ${
+                    selectedGender === 'male' ? 'bg-rose-600 text-white shadow-md' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
                   }`}
                 >
                   Men
@@ -253,11 +279,11 @@ export default function HomePage() {
       )}
 
       {/* Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950 py-8 text-xs text-slate-500">
+      <footer className="border-t border-slate-900 bg-slate-950 py-8 text-xs text-slate-400">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Heart className="w-4 h-4 text-rose-500" />
-            <span className="font-bold text-slate-400">AgentMatch AI</span>
+            <span className="font-bold text-slate-300">AgentMatch AI</span>
             <span>• Autonomous Multi-Agent Dating Simulation</span>
           </div>
 
