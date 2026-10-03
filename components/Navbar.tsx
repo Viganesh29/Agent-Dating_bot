@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { Heart, Users, Sparkles, Trophy, PlusCircle } from 'lucide-react';
 
 interface NavbarProps {
@@ -44,7 +43,7 @@ export default function Navbar({ activeTab, setActiveTab, peopleCount }: NavbarP
         <nav className="flex items-center gap-1 sm:gap-2">
           <button
             onClick={() => setActiveTab('profiles')}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all ${
+            className={`flex items-center gap-2 px-3.5 py-2 min-h-[44px] rounded-xl text-sm font-semibold transition-all ${
               activeTab === 'profiles'
                 ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40 shadow-sm'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/60'
@@ -59,7 +58,7 @@ export default function Navbar({ activeTab, setActiveTab, peopleCount }: NavbarP
 
           <button
             onClick={() => setActiveTab('arena')}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all ${
+            className={`flex items-center gap-2 px-3.5 py-2 min-h-[44px] rounded-xl text-sm font-semibold transition-all ${
               activeTab === 'arena'
                 ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 shadow-sm'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/60'
@@ -75,7 +74,7 @@ export default function Navbar({ activeTab, setActiveTab, peopleCount }: NavbarP
 
           <button
             onClick={() => setActiveTab('rankings')}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all ${
+            className={`flex items-center gap-2 px-3.5 py-2 min-h-[44px] rounded-xl text-sm font-semibold transition-all ${
               activeTab === 'rankings'
                 ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/60'
@@ -88,7 +87,7 @@ export default function Navbar({ activeTab, setActiveTab, peopleCount }: NavbarP
 
           <button
             onClick={() => setActiveTab('ingest')}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all ${
+            className={`flex items-center gap-2 px-3.5 py-2 min-h-[44px] rounded-xl text-sm font-semibold transition-all ${
               activeTab === 'ingest'
                 ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-sm'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/60'

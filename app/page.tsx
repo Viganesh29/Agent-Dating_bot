@@ -88,7 +88,7 @@ export default function HomePage() {
       {/* Top Navigation */}
       <Navbar 
         activeTab={activeTab} 
-        setActiveTab={setActiveTab} 
+        setActiveTab={handleTabChange} 
         peopleCount={people.length} 
       />
 
