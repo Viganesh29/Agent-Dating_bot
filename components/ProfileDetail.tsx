@@ -30,18 +30,19 @@ export default function ProfileDetail({
 
   return (
     <div 
-      className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200"
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200 cursor-pointer"
       role="dialog"
       aria-modal="true"
-      aria-labelledby="profile-modal-title"
+      aria-labelledby="profile-detail-title"
     >
-      <div className="relative w-full max-w-4xl bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col">
+      <div className="relative w-full max-w-4xl bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col cursor-default">
         
         {/* Modal Header & Hero */}
         <div className="relative bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 p-6 sm:p-8 border-b border-slate-800">
           <button 
             onClick={onClose}
-            aria-label="Close profile details"
+            aria-label="Close dossier dialog"
             className="absolute top-5 right-5 p-2 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors border border-slate-700 focus:ring-2 focus:ring-rose-500 focus:outline-none"
           >
             <X className="w-5 h-5" aria-hidden="true" />
@@ -63,7 +64,7 @@ export default function ProfileDetail({
 
             <div className="flex-1 text-center sm:text-left">
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1.5">
-                <h2 id="profile-modal-title" className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                   {person.name}
                 </h2>
                 <span className="px-3 py-0.5 text-xs font-semibold bg-rose-500/20 text-rose-300 border border-rose-500/30 rounded-full">

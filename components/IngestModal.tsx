@@ -174,45 +174,43 @@ export default function IngestModal({ onSuccess, onCancel }: IngestModalProps) {
 
         {/* LinkedIn Input */}
         <div>
-          <label htmlFor="linkedin-url-input" className="text-xs font-bold text-slate-300 block mb-1.5 flex items-center gap-1.5">
-            <span className="text-blue-400 font-extrabold" aria-hidden="true">in</span>
+          <label className="text-xs font-bold text-slate-300 block mb-1.5 flex items-center gap-1.5">
+            <span className="text-blue-400 font-extrabold">in</span>
             <span>LinkedIn Public Profile URL</span>
           </label>
           <input
-            id="linkedin-url-input"
             type="url"
             required
             placeholder="https://www.linkedin.com/in/username"
             value={linkedinUrl}
             onChange={(e) => setLinkedinUrl(e.target.value)}
             disabled={loading}
-            className="w-full px-4 py-2.5 min-h-[44px] rounded-xl bg-slate-950 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30"
+            className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-blue-500"
           />
         </div>
 
         {/* Instagram Input */}
         <div>
-          <label htmlFor="instagram-url-input" className="text-xs font-bold text-slate-300 block mb-1.5 flex items-center gap-1.5">
-            <span className="text-pink-400 font-extrabold" aria-hidden="true">IG</span>
+          <label className="text-xs font-bold text-slate-300 block mb-1.5 flex items-center gap-1.5">
+            <span className="text-pink-400 font-extrabold">IG</span>
             <span>Instagram Public Profile URL</span>
           </label>
           <input
-            id="instagram-url-input"
             type="url"
             required
             placeholder="https://www.instagram.com/username"
             value={instagramUrl}
             onChange={(e) => setInstagramUrl(e.target.value)}
             disabled={loading}
-            className="w-full px-4 py-2.5 min-h-[44px] rounded-xl bg-slate-950 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-500/30"
+            className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-pink-500"
           />
         </div>
 
         {/* Progress Pipeline Animation */}
         {loading && (
-          <div className="p-4 rounded-2xl bg-slate-950 border border-emerald-900/40 text-xs text-emerald-300 space-y-2 animate-in fade-in" role="status" aria-live="polite">
+          <div className="p-4 rounded-2xl bg-slate-950 border border-emerald-900/40 text-xs text-emerald-300 space-y-2 animate-in fade-in">
             <div className="flex items-center gap-2 font-bold">
-              <Loader2 className="w-4 h-4 animate-spin text-emerald-400" aria-hidden="true" />
+              <Loader2 className="w-4 h-4 animate-spin text-emerald-400" />
               <span>Scraper & Synthesizer Pipeline Running</span>
             </div>
             <p className="text-slate-400 pl-6 text-[11px]">{currentStep}</p>
@@ -225,7 +223,7 @@ export default function IngestModal({ onSuccess, onCancel }: IngestModalProps) {
             type="button"
             onClick={onCancel}
             disabled={loading}
-            className="px-5 py-2.5 min-h-[44px] rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition-colors focus:ring-2 focus:ring-slate-400 focus:outline-none"
+            className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition-colors"
           >
             Cancel
           </button>
@@ -233,17 +231,17 @@ export default function IngestModal({ onSuccess, onCancel }: IngestModalProps) {
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-2.5 min-h-[44px] rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-extrabold shadow-lg shadow-emerald-950/40 flex items-center gap-2 transition-all disabled:opacity-50 focus:ring-2 focus:ring-emerald-400 focus:outline-none"
+            className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-extrabold shadow-lg shadow-emerald-950/40 flex items-center gap-2 transition-all disabled:opacity-50"
           >
             {loading ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
+                <Loader2 className="w-4 h-4 animate-spin" />
                 <span>Reading & Synthesizing...</span>
               </>
             ) : (
               <>
                 <span>Ingest & Create Agent</span>
-                <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                <ArrowRight className="w-4 h-4" />
               </>
             )}
           </button>

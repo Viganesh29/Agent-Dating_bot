@@ -292,10 +292,9 @@ export default function DatingArena({
               <button
                 onClick={() => setIsPlaying(!isPlaying)}
                 disabled={isDateComplete}
-                aria-label={isPlaying ? 'Pause dialogue' : isDateComplete ? 'Date Finished' : 'Play live dialogue'}
-                className="px-3.5 py-2 min-h-[40px] rounded-lg bg-rose-600 hover:bg-rose-500 disabled:opacity-50 text-white font-bold flex items-center gap-1.5 transition-colors focus:ring-2 focus:ring-rose-400 focus:outline-none"
+                className="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 disabled:opacity-50 text-white font-bold flex items-center gap-1.5 transition-colors"
               >
-                {isPlaying ? <Pause className="w-3.5 h-3.5" aria-hidden="true" /> : <Play className="w-3.5 h-3.5" aria-hidden="true" />}
+                {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
                 <span>{isPlaying ? 'Pause' : isDateComplete ? 'Date Finished' : 'Play Live'}</span>
               </button>
 
@@ -306,11 +305,10 @@ export default function DatingArena({
                   }
                 }}
                 disabled={isDateComplete}
-                aria-label="Show next dialogue line"
-                className="px-3.5 py-2 min-h-[40px] rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-slate-200 font-semibold border border-slate-700 transition-colors flex items-center gap-1 focus:ring-2 focus:ring-slate-400 focus:outline-none"
+                className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-slate-200 font-semibold border border-slate-700 transition-colors flex items-center gap-1"
               >
                 <span>Next Line</span>
-                <ChevronRight className="w-3.5 h-3.5" aria-hidden="true" />
+                <ChevronRight className="w-3.5 h-3.5" />
               </button>
 
               <button
@@ -319,10 +317,9 @@ export default function DatingArena({
                   setIsPlaying(false);
                 }}
                 disabled={isDateComplete}
-                aria-label="Instant reveal entire date dialogue"
-                className="px-3.5 py-2 min-h-[40px] rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-slate-300 font-semibold border border-slate-700 transition-colors flex items-center gap-1 focus:ring-2 focus:ring-slate-400 focus:outline-none"
+                className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-slate-300 font-semibold border border-slate-700 transition-colors flex items-center gap-1"
               >
-                <FastForward className="w-3.5 h-3.5" aria-hidden="true" />
+                <FastForward className="w-3.5 h-3.5" />
                 <span>Instant Reveal</span>
               </button>
             </div>
@@ -330,8 +327,7 @@ export default function DatingArena({
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setSpeed(speed === 'normal' ? 'fast' : 'normal')}
-                aria-label={`Toggle playback speed. Current speed: ${speed === 'normal' ? '1x' : '2x'}`}
-                className="px-3 py-2 min-h-[40px] rounded-lg bg-slate-800 text-slate-300 border border-slate-700 font-medium hover:bg-slate-700 transition-colors focus:ring-2 focus:ring-slate-400 focus:outline-none"
+                className="px-2.5 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700 font-medium"
               >
                 Speed: {speed === 'normal' ? '1x' : '2x'}
               </button>
@@ -341,11 +337,10 @@ export default function DatingArena({
                   setCurrentTurnIndex(0);
                   setIsPlaying(true);
                 }}
-                aria-label="Restart simulated date"
+                className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors"
                 title="Restart Date"
-                className="p-2 min-h-[40px] min-w-[40px] rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors flex items-center justify-center focus:ring-2 focus:ring-slate-400 focus:outline-none"
               >
-                <RotateCcw className="w-4 h-4" aria-hidden="true" />
+                <RotateCcw className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>

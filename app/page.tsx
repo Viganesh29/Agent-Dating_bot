@@ -58,100 +58,101 @@ export default function HomePage() {
     setInspectingPerson(alexis);
   };
 
+  const handleTabChange = (tab: 'profiles' | 'arena' | 'rankings' | 'ingest' | 'video') => {
+    setActiveTab(tab);
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const handleDateClick = (person: Person) => {
     setArenaPersonA(person);
     const candidate = people.find(p => p.id !== person.id) || people[1];
     setArenaPersonB(candidate);
-    setActiveTab('arena');
+    handleTabChange('arena');
   };
 
   const handleViewRankings = (person: Person) => {
     setRankingsTargetPerson(person);
-    setActiveTab('rankings');
+    handleTabChange('rankings');
   };
 
   const handleWatchDateBetween = (personA: Person, personB: Person) => {
     setArenaPersonA(personA);
     setArenaPersonB(personB);
-    setActiveTab('arena');
+    handleTabChange('arena');
   };
 
   const handleNewPersonCreated = (newPerson: Person) => {
     setPeople(prev => [newPerson, ...prev]);
     setInspectingPerson(newPerson);
-    setActiveTab('profiles');
+    handleTabChange('profiles');
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-[#090d16] text-slate-100 selection:bg-rose-500 selection:text-white">
       
-      {/* Skip Link for Keyboard Accessibility */}
-      <a 
-        href="#main-content" 
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 px-4 py-2 bg-rose-600 text-white font-bold rounded-xl shadow-xl focus:outline-none focus:ring-2 focus:ring-white text-xs"
-      >
-        Skip to main content
-      </a>
-
       {/* Top Navigation */}
       <Navbar 
         activeTab={activeTab} 
-        setActiveTab={setActiveTab} 
+        setActiveTab={handleTabChange} 
         peopleCount={people.length} 
       />
 
       {/* Main Content Area */}
       <main id="main-content" className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10 focus:outline-none" tabIndex={-1}>
         
-        {/* HERO BANNER */}
-        <section className="relative overflow-hidden rounded-3xl p-6 sm:p-10 border border-slate-800 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950/70 shadow-2xl">
-          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-rose-600/10 blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-indigo-600/10 blur-3xl pointer-events-none" />
+        {/* HERO BANNER - Rendered on Profiles Tab */}
+        {activeTab === 'profiles' && (
+          <section className="relative overflow-hidden rounded-3xl p-6 sm:p-10 border border-slate-800 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950/70 shadow-2xl">
+            <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-rose-600/10 blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-indigo-600/10 blur-3xl pointer-events-none" />
 
-          <div className="relative z-10 max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs font-bold mb-4">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Autonomous AI Dating Harness • {people.length} Real Verified Cohort</span>
+            <div className="relative z-10 max-w-3xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs font-bold mb-4">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Autonomous AI Dating Harness • {people.length} Real Verified Cohort</span>
+              </div>
+
+              <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-4">
+                Each person has an agent. <br />
+                <span className="bg-gradient-to-r from-rose-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+                  The agents date each other.
+                </span>
+              </h1>
+
+              <p className="text-sm sm:text-base text-slate-300 font-medium leading-relaxed mb-6">
+                There are exactly two sources of truth: each person&apos;s official public <strong>LinkedIn</strong> and public <strong>Instagram</strong>. The agent reads both, synthesizes their Needs, Hobbies, Interests, and Qualities, dates other agents on their behalf, and reveals who fits them best.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-3">
+                <button
+                  onClick={() => handleTabChange('arena')}
+                  className="px-5 py-3 rounded-2xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white text-xs sm:text-sm font-extrabold shadow-lg shadow-rose-950/40 flex items-center gap-2 transition-all min-h-[44px]"
+                >
+                  <Heart className="w-4 h-4 fill-white" />
+                  <span>Watch Live Agent Dates</span>
+                </button>
+
+                <button
+                  onClick={() => handleTabChange('rankings')}
+                  className="px-5 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs sm:text-sm font-bold border border-slate-700 transition-all flex items-center gap-2 min-h-[44px]"
+                >
+                  <Trophy className="w-4 h-4 text-amber-400" />
+                  <span>View Final Rankings</span>
+                </button>
+
+                <button
+                  onClick={() => handleTabChange('ingest')}
+                  className="px-4 py-3 rounded-2xl bg-emerald-950/60 hover:bg-emerald-900/60 text-emerald-300 text-xs sm:text-sm font-bold border border-emerald-800/60 transition-all flex items-center gap-2 min-h-[44px]"
+                >
+                  <PlusCircle className="w-4 h-4 text-emerald-400" />
+                  <span>Paste Your Own Public Links</span>
+                </button>
+              </div>
             </div>
-
-            <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-4">
-              Each person has an agent. <br />
-              <span className="bg-gradient-to-r from-rose-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
-                The agents date each other.
-              </span>
-            </h1>
-
-            <p className="text-sm sm:text-base text-slate-300 font-medium leading-relaxed mb-6">
-              There are exactly two sources of truth: each person&apos;s official public <strong>LinkedIn</strong> and public <strong>Instagram</strong>. The agent reads both, synthesizes their Needs, Hobbies, Interests, and Qualities, dates other agents on their behalf, and reveals who fits them best.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-3">
-              <button
-                onClick={() => setActiveTab('arena')}
-                className="px-5 py-3 rounded-2xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white text-xs sm:text-sm font-extrabold shadow-lg shadow-rose-950/40 flex items-center gap-2 transition-all min-h-[44px]"
-              >
-                <Heart className="w-4 h-4 fill-white" />
-                <span>Watch Live Agent Dates</span>
-              </button>
-
-              <button
-                onClick={() => setActiveTab('rankings')}
-                className="px-5 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs sm:text-sm font-bold border border-slate-700 transition-all flex items-center gap-2 min-h-[44px]"
-              >
-                <Trophy className="w-4 h-4 text-amber-400" />
-                <span>View Final Rankings</span>
-              </button>
-
-              <button
-                onClick={() => setActiveTab('ingest')}
-                className="px-4 py-3 rounded-2xl bg-emerald-950/60 hover:bg-emerald-900/60 text-emerald-300 text-xs sm:text-sm font-bold border border-emerald-800/60 transition-all flex items-center gap-2 min-h-[44px]"
-              >
-                <PlusCircle className="w-4 h-4 text-emerald-400" />
-                <span>Paste Your Own Public Links</span>
-              </button>
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* TAB 1: PROFILES GALLERY */}
         {activeTab === 'profiles' && (
@@ -279,11 +280,11 @@ export default function HomePage() {
       )}
 
       {/* Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950 py-8 text-xs text-slate-400">
+      <footer className="border-t border-slate-900 bg-slate-950 py-8 text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Heart className="w-4 h-4 text-rose-500" />
-            <span className="font-bold text-slate-300">AgentMatch AI</span>
+            <span className="font-bold text-slate-400">AgentMatch AI</span>
             <span>• Autonomous Multi-Agent Dating Simulation</span>
           </div>
 
